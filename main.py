@@ -36,6 +36,7 @@ import tkinter as tk
 
 USER = 'userId'
 POST = 'postId'
+bullet_ascii = 149
 
 user_id = {}
 post_id = {}
@@ -101,7 +102,7 @@ def create_toolbox(window, item_type, side):
 
         # Populate the listbox with the users
         for item in items:
-            items_listbox.insert(tk.END, f"{item[param]}")
+            items_listbox.insert(tk.END, f"{chr(bullet_ascii)} {item[param]}")
             user_id[item[param]] = item['id']
 
         # Create a listbox to display the todos
@@ -116,8 +117,8 @@ def create_toolbox(window, item_type, side):
 
 if __name__ == '__main__':
     window = tk.Tk()
-    users_frame = create_toolbox(window, USER, tk.RIGHT)
-    posts_frame = create_toolbox(window, POST, tk.LEFT)
+    users_frame = create_toolbox(window, USER, tk.LEFT)
+    posts_frame = create_toolbox(window, POST, tk.RIGHT)
 
     users_frame.pack()
     posts_frame.pack()
