@@ -116,6 +116,7 @@ def create_toolbox(window, item_type, side):
 
 
 if __name__ == '__main__':
+    ""
     window = tk.Tk()
     users_frame = create_toolbox(window, USER, tk.LEFT)
     posts_frame = create_toolbox(window, POST, tk.RIGHT)
