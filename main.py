@@ -72,8 +72,10 @@ def listbox_clicked(event, listbox_activated, listbox_write_to, item_type):
     selected_item = listbox_activated.get(tk.ACTIVE).replace(bullet_point, '').strip()
     if item_type == USER:
         id = user_id[selected_item]
-    else:
+    elif item_type == POST:
         id = post_id[selected_item]
+    else:
+        return
 
     # Call the get_list function with the selected user's ID
     get_list(USER, id, listbox_write_to)
@@ -112,7 +114,7 @@ def create_toolbox(window, item_type, side):
             elif item_type == POST:
                 post_id[item[param]] = item['id']
 
-        # Create a listbox to display the todos
+        # Create a listbox to display the items
         info_listbox = tk.Listbox(frame)
         info_listbox.pack(side=tk.BOTTOM)
 
