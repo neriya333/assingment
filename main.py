@@ -54,14 +54,14 @@ def get_list(item_type, id, list_box):
     # Check if the request was successful (status code 200)
     if response.status_code == 200:
         # Parse the users_response as JSON
-        todos = response.json()
+        respons = response.json()
 
-        # Clear the previous todos (if any)
+        # Clear the previous respons (if any)
         list_box.delete(0, tk.END)
 
-        # Add the todos to the listbox
-        for todo in todos:
-            list_box.insert(tk.END, f'{bullet_point} {todo["title"]}')
+        # Add the respons to the listbox
+        for respon in respons:
+            list_box.insert(tk.END, f'{bullet_point} {respon["title"]}')
     else:
         print('Failed to retrieve items for ID', id)
 
@@ -75,7 +75,7 @@ def listbox_clicked(event, listbox_activated, listbox_write_to, item_type):
     else:
         id = post_id[selected_item]
 
-    # Call the get_todos function with the selected user's ID
+    # Call the get_list function with the selected user's ID
     get_list(USER, id, listbox_write_to)
 
 
@@ -107,7 +107,6 @@ def create_toolbox(window, item_type, side):
         # Populate the listbox with the users
         for item in items:
             items_listbox.insert(tk.END, f"{bullet_point} {item[param]}")
-            # todo there is some bug here with the dicts
             if item_type == USER:
                 user_id[item[param]] = item['id']
             elif item_type == POST:
