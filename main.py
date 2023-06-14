@@ -36,7 +36,7 @@ import tkinter as tk
 
 USER = 'userId'
 POST = 'postId'
-bullet_ascii = 149
+bullet_point = '\u2022'
 
 user_id = {}
 post_id = {}
@@ -61,14 +61,14 @@ def get_list(item_type, id, list_box):
 
         # Add the todos to the listbox
         for todo in todos:
-            list_box.insert(tk.END, todo['title'])
+            list_box.insert(tk.END, f'{bullet_point} {todo["title"]}')
     else:
         print('Failed to retrieve items for ID', id)
 
 
 def listbox_clicked(event, listbox_activated, listbox_write_to):
     # Get the selected user from the listbox
-    selected_user = listbox_activated.get(tk.ACTIVE)
+    selected_user = listbox_activated.get(tk.ACTIVE).replace(bullet_point,'').strip()
     id = user_id[selected_user]
 
     # Call the get_todos function with the selected user's ID
@@ -102,7 +102,7 @@ def create_toolbox(window, item_type, side):
 
         # Populate the listbox with the users
         for item in items:
-            items_listbox.insert(tk.END, f"{chr(bullet_ascii)} {item[param]}")
+            items_listbox.insert(tk.END, f"{bullet_point} {item[param]}")
             user_id[item[param]] = item['id']
 
         # Create a listbox to display the todos
@@ -123,9 +123,5 @@ if __name__ == '__main__':
     users_frame.pack()
     posts_frame.pack()
 
-    window.mainloop()
     # Run the main window's event loop
-    # window.mainloop()
-
-    # else:
-    #     print('Failed to retrieve users. Status code:', items_response.status_code)
+    window.mainloop()
